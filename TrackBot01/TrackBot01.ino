@@ -39,21 +39,29 @@ void loop() {
   
   // order is 1,0,3,2
   
-  // check right most sensor first
-  if (sensorValues[2] >= cutoff[2]) {  // in the black
-    angle -= 15;
+  if (sensorValues[1] < cutoffs[1] && sensorValues[2] < cutoffs[2]) {  // on the line
+    angle = 0;
   }
-  if (sensorValues[3] >= cutoff[3] {
-    if (sensorValues[1] < cutoff[1]) {  // left sensor still on line
-      angle -= 15;
-    }
-    else if (sensorValues[2] < cutoff[2]) {  // right sensor still on line
-      angle += 20;
-    }
-    else {  // backup everything is off the line
-      dist = 2;
+  else {
+    if (sensorValues[1] >= cutoffs[1] && sensorValues[2] >= cutoffs[2]) {  // off the line so backup
+      dist = -2;
       angle = 0;
     }
-  }
+    else if (sensorValues[3] >= cutoffs[3] && sensorValues[1] >= cutoffs[1]) {  // 2 left sensors are off the line
+        angle = 30;
+    }
+    else if (sensorValues[3] >= cutoffs[3] && sensorValues[2] >= cutoffs[2]) {  // 2 right sensors are off the line
+        angle = -20;
+    }
+      else if (sensorValues[2] >= cutoffs[2]) {  // right sensor is in the black
+        angle = -15;
+    }
+      else if (sensorValues[1] >= cutoffs[1]) {  // left sensor is in the black
+        angle = 15;
+    }
+ 
+   }
   
+  MyMiP.distanceDrive(dist, angle); 
+  delay(100);
 }
