@@ -18,6 +18,8 @@ class MiP {
     
     void init(void);
 
+	 void sendMiP(unsigned char *message, uint8_t array_length); 	// added by sharky
+
     void playSingleSound(Sounds MiPSound);
     void setPosition(SetPosition pose);
     void distanceDrive(int16_t distance, int16_t angle);
@@ -66,8 +68,9 @@ class MiP {
 
     //void getSoftwareVersion(int8_t* version);
     //void getHardwareVersion(int8_t* version);
-    
-    //void setVolume(int8_t volume);
+*/    
+    void setVolume(int8_t volume);
+/*
     //int8_t getVolume();
 
     void setClapDetection(int8_t mode);

@@ -26,6 +26,10 @@ void MiP::init(void){
   sendMessage(data_array, array_length);
 }
 
+void MiP::sendMiP(unsigned char *message, uint8_t array_length) {
+	sendMessage(data_array, array_length);
+}
+
 void MiP::playSingleSound(Sounds MiPSound){
   uint8_t array_length = 5;
   uint8_t data_array[array_length];
@@ -209,10 +213,22 @@ void MiP::getSoftwareVersion(int8_t* version){
 void MiP::getHardwareVersion(int8_t* version){
 
 }
-
+*/
 void MiP::setVolume(int8_t volume){
+  uint8_t array_length = 3;
+  uint8_t data_array[array_length];
+  
+  if (volume > 7) {	// 7 is max volume
+  	volume = 7;
+  }
+  data_array[0] = 0x15; 
+  data_array[1] = volume;
+  
+  sendMessage(data_array, array_length);
 
 }
+
+/*
 int8_t MiP::getVolume(){
 	int8_t volume;
 
