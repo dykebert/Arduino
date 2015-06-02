@@ -58,7 +58,7 @@ void MiP::distanceDrive(int16_t distance, int16_t angle){
   else{
    data_array[1] = 0x01; // Reverse 
   };
-  data_array[2] = uint8_t(distance);
+  data_array[2] = abs(distance);
   
   if(angle >=0){
    data_array[3] = 0x01; // Clocwise    
@@ -88,10 +88,16 @@ void MiP::turnAngle(int8_t direction, int8_t speed, uint8_t angle){
 void MiP::continuousDrive(int8_t direction, int8_t speed){
 
 }
+*/
 void MiP::stop(void){
+  uint8_t array_length = 2;
+  uint8_t data_array[array_length];
+  data_array[0] = 0x77; //Drive Distance Command
+
+  sendMessage(data_array, array_length);
 
 }
-
+/*
 void MiP::setGameMode(Game mode){
 	uint8_t data_array[2];
 	data_array[0] = 0x76;
